@@ -5,6 +5,7 @@ import Confetti from "@/components/Confetti";
 import SparkleEffect from "@/components/SparkleEffect";
 import BirthdayMessage from "@/components/BirthdayMessage";
 import LanguageSelector from "@/components/LanguageSelector";
+import MusicPlayer from "@/components/MusicPlayer";
 
 const Index = () => {
   const [language, setLanguage] = useState<"ar" | "en" | null>(null);
@@ -29,6 +30,9 @@ const Index = () => {
             <FloatingHearts />
             <Confetti />
             <SparkleEffect />
+            
+            {/* Music Player */}
+            <MusicPlayer />
             
             {/* Main content */}
             <BirthdayMessage language={language} />

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Heart, Cake, Gift, Star } from "lucide-react";
 import { translations } from "@/contexts/LanguageContext";
+import PhotoFrame from "./PhotoFrame";
 
 interface BirthdayMessageProps {
   language: "ar" | "en";
@@ -16,7 +17,7 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
       opacity: 1,
       transition: {
         staggerChildren: 0.3,
-        delayChildren: 0.5,
+        delayChildren: 0.3,
       },
     },
   };
@@ -44,7 +45,7 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
         type: "spring" as const,
         stiffness: 200,
         damping: 15,
-        delay: 2,
+        delay: 2.5,
       },
     },
   };
@@ -79,34 +80,39 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
       {/* Cake Icon */}
       <motion.div
         variants={itemVariants}
-        className="mb-6"
+        className="mb-4"
       >
         <motion.div
           animate={{ scale: [1, 1.1, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <Cake size={70} className="text-accent" strokeWidth={1.5} />
+          <Cake size={60} className="text-accent" strokeWidth={1.5} />
         </motion.div>
       </motion.div>
 
       {/* Main Title */}
       <motion.h1
         variants={itemVariants}
-        className="text-4xl md:text-6xl lg:text-7xl font-bold text-glow gradient-text text-center mb-4"
+        className="text-4xl md:text-5xl lg:text-6xl font-bold text-glow gradient-text text-center mb-4"
       >
         {t.happyBirthday}
       </motion.h1>
 
+      {/* Photo Frame */}
+      <motion.div variants={itemVariants} className="mb-4">
+        <PhotoFrame language={language} />
+      </motion.div>
+
       {/* Animated Name */}
       <motion.div
         variants={itemVariants}
-        className="mb-6"
+        className="mb-4"
       >
         <div className="flex justify-center gap-1 md:gap-2">
           {nameLetters.map((letter, index) => (
             <motion.span
               key={index}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold text-glow-gold gradient-text-gold"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold text-glow-gold gradient-text-gold"
               initial={{ opacity: 0, y: 50, rotateY: 90 }}
               animate={{ 
                 opacity: 1, 
@@ -114,7 +120,7 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
                 rotateY: 0,
               }}
               transition={{
-                delay: 1 + index * 0.15,
+                delay: 1.2 + index * 0.15,
                 type: "spring",
                 stiffness: 100,
               }}
@@ -149,7 +155,7 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
       {/* Subtitle */}
       <motion.p
         variants={itemVariants}
-        className="text-xl md:text-2xl lg:text-3xl font-medium text-foreground/90 text-center mb-8"
+        className="text-lg md:text-xl lg:text-2xl font-medium text-foreground/90 text-center mb-6"
       >
         {t.toTheMost}
       </motion.p>
@@ -157,7 +163,7 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
       {/* Love Message */}
       <motion.div
         variants={itemVariants}
-        className="max-w-2xl mx-auto text-center mb-8"
+        className="max-w-xl mx-auto text-center mb-6"
       >
         <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
           {t.message1}
@@ -181,7 +187,7 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
           transition={{ duration: 1.5, repeat: Infinity }}
         >
           <Heart
-            size={100}
+            size={80}
             className="text-primary fill-primary relative z-10"
             strokeWidth={1}
           />
@@ -191,10 +197,10 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
       {/* Love Declaration */}
       <motion.div
         variants={itemVariants}
-        className="mt-8"
+        className="mt-6"
       >
         <motion.p
-          className="text-2xl md:text-3xl lg:text-4xl font-bold text-glow gradient-text"
+          className="text-xl md:text-2xl lg:text-3xl font-bold text-glow gradient-text"
           animate={{ 
             scale: [1, 1.02, 1],
           }}
@@ -207,7 +213,7 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
       {/* Wishes */}
       <motion.div
         variants={itemVariants}
-        className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl w-full px-4"
+        className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl w-full px-4"
       >
         {[
           { icon: Heart, text: t.wish1 },
@@ -216,7 +222,7 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
         ].map((wish, index) => (
           <motion.div
             key={index}
-            className="flex flex-col items-center gap-3 p-5 rounded-2xl bg-card/50 backdrop-blur-sm border border-primary/20"
+            className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-card/50 backdrop-blur-sm border border-primary/20"
             whileHover={{ scale: 1.05, borderColor: "hsl(340 80% 60%)" }}
             transition={{ type: "spring", stiffness: 300 }}
           >
@@ -224,9 +230,9 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
               animate={{ rotate: [0, 10, -10, 0] }}
               transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
             >
-              <wish.icon size={28} className="text-primary" />
+              <wish.icon size={24} className="text-primary" />
             </motion.div>
-            <span className="text-base font-medium text-foreground">{wish.text}</span>
+            <span className="text-sm font-medium text-foreground">{wish.text}</span>
           </motion.div>
         ))}
       </motion.div>
