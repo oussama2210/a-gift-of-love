@@ -1,7 +1,14 @@
 import { motion } from "framer-motion";
 import { Heart, Cake, Gift, Star } from "lucide-react";
 import { translations } from "@/contexts/LanguageContext";
-import PhotoFrame from "./PhotoFrame";
+
+// Enhanced components
+import EnhancedPhotoFrame from "@/components/enhanced/EnhancedPhotoFrame";
+import EnhancedWishCards from "@/components/enhanced/EnhancedWishCards";
+
+// New components
+import LoveQuotesCarousel from "@/components/new/LoveQuotesCarousel";
+import MemoryTimeline from "@/components/new/MemoryTimeline";
 
 interface BirthdayMessageProps {
   language: "ar" | "en";
@@ -54,7 +61,7 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
 
   return (
     <motion.div
-      className="relative z-20 flex flex-col items-center justify-center min-h-screen px-6 py-12"
+      className="relative z-20 flex flex-col items-center justify-start min-h-screen px-6 py-12"
       style={{ direction: isRTL ? "rtl" : "ltr" }}
       variants={containerVariants}
       initial="hidden"
@@ -68,7 +75,7 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
       >
         <Star size={40} className="text-accent fill-accent" />
       </motion.div>
-      
+
       <motion.div
         className="absolute top-32 left-10 md:left-20"
         animate={{ y: [0, -10, 0] }}
@@ -93,14 +100,18 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
       {/* Main Title */}
       <motion.h1
         variants={itemVariants}
-        className="text-4xl md:text-5xl lg:text-6xl font-bold text-glow gradient-text text-center mb-4"
+        className="text-4xl md:text-5xl lg:text-6xl font-bold text-glow gradient-text-animated text-center mb-4"
       >
         {t.happyBirthday}
       </motion.h1>
 
-      {/* Photo Frame */}
+      {/* Enhanced Photo Frame */}
       <motion.div variants={itemVariants} className="mb-4">
-        <PhotoFrame language={language} />
+        <EnhancedPhotoFrame
+          language={language}
+          decorationStyle="mixed"
+          glowIntensity="medium"
+        />
       </motion.div>
 
       {/* Animated Name */}
@@ -114,9 +125,9 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
               key={index}
               className="text-4xl md:text-6xl lg:text-7xl font-bold text-glow-gold gradient-text-gold"
               initial={{ opacity: 0, y: 50, rotateY: 90 }}
-              animate={{ 
-                opacity: 1, 
-                y: 0, 
+              animate={{
+                opacity: 1,
+                y: 0,
                 rotateY: 0,
               }}
               transition={{
@@ -172,10 +183,19 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
         </p>
       </motion.div>
 
+      {/* Love Quotes Carousel */}
+      <motion.div variants={itemVariants} className="w-full mb-8">
+        <LoveQuotesCarousel
+          quotes={[]}
+          language={language}
+          autoPlayInterval={5000}
+        />
+      </motion.div>
+
       {/* Glowing Heart */}
       <motion.div
         variants={heartVariants}
-        className="relative"
+        className="relative mb-8"
       >
         <motion.div
           className="absolute inset-0 blur-2xl bg-primary/40 rounded-full"
@@ -197,11 +217,11 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
       {/* Love Declaration */}
       <motion.div
         variants={itemVariants}
-        className="mt-6"
+        className="mb-8"
       >
         <motion.p
           className="text-xl md:text-2xl lg:text-3xl font-bold text-glow gradient-text"
-          animate={{ 
+          animate={{
             scale: [1, 1.02, 1],
           }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -210,31 +230,40 @@ const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
         </motion.p>
       </motion.div>
 
-      {/* Wishes */}
+      {/* Enhanced Wish Cards */}
+      <motion.div variants={itemVariants} className="mb-12">
+        <EnhancedWishCards language={language} layout="grid" />
+      </motion.div>
+
+      {/* Memory Timeline */}
+      <motion.div variants={itemVariants} className="w-full">
+        <MemoryTimeline
+          memories={[]}
+          language={language}
+          layout="alternating"
+        />
+      </motion.div>
+
+      {/* Footer decoration */}
       <motion.div
         variants={itemVariants}
-        className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl w-full px-4"
+        className="mt-12 flex items-center gap-4"
       >
-        {[
-          { icon: Heart, text: t.wish1 },
-          { icon: Star, text: t.wish2 },
-          { icon: Gift, text: t.wish3 },
-        ].map((wish, index) => (
-          <motion.div
-            key={index}
-            className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-card/50 backdrop-blur-sm border border-primary/20"
-            whileHover={{ scale: 1.05, borderColor: "hsl(340 80% 60%)" }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <motion.div
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
-            >
-              <wish.icon size={24} className="text-primary" />
-            </motion.div>
-            <span className="text-sm font-medium text-foreground">{wish.text}</span>
-          </motion.div>
-        ))}
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
+          transition={{ duration: 3, repeat: Infinity }}
+        >
+          <Heart size={24} className="text-primary fill-primary" />
+        </motion.div>
+        <span className="text-muted-foreground text-sm">
+          {language === "ar" ? "بكل حبي" : "With all my love"}
+        </span>
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], rotate: [0, -10, 10, 0] }}
+          transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+        >
+          <Heart size={24} className="text-primary fill-primary" />
+        </motion.div>
       </motion.div>
     </motion.div>
   );

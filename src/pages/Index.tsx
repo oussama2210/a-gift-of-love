@@ -1,39 +1,74 @@
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
+
+// Effects
+import EnhancedBackground from "@/components/effects/EnhancedBackground";
+import RosePetals from "@/components/effects/RosePetals";
+import StarParticles from "@/components/effects/StarParticles";
+
+// Components
 import FloatingHearts from "@/components/FloatingHearts";
 import Confetti from "@/components/Confetti";
 import SparkleEffect from "@/components/SparkleEffect";
 import BirthdayMessage from "@/components/BirthdayMessage";
 import LanguageSelector from "@/components/LanguageSelector";
-import MusicPlayer from "@/components/MusicPlayer";
+
+// Enhanced components
+import EnhancedMusicPlayer from "@/components/enhanced/EnhancedMusicPlayer";
+
+// New components
+import LoadingAnimation from "@/components/new/LoadingAnimation";
 
 const Index = () => {
   const [language, setLanguage] = useState<"ar" | "en" | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false);
+
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
+
+  const handleLanguageSelect = (lang: "ar" | "en") => {
+    setLanguage(lang);
+    setShowContent(true);
+  };
 
   return (
-    <div 
+    <div
       className="relative min-h-screen overflow-hidden"
       style={{ direction: language === "ar" ? "rtl" : "ltr" }}
     >
-      {/* Background gradient overlay */}
-      <div className="fixed inset-0 bg-gradient-to-b from-background via-background to-secondary/20 z-0" />
-      
+      {/* Loading animation */}
+      {isLoading && (
+        <LoadingAnimation onComplete={handleLoadingComplete} />
+      )}
+
+      {/* Enhanced background */}
+      <EnhancedBackground variant="romantic" patternType="hearts" animated />
+
       <AnimatePresence mode="wait">
-        {language === null ? (
-          <LanguageSelector 
+        {!isLoading && language === null ? (
+          <LanguageSelector
             key="language-selector"
-            onSelectLanguage={(lang) => setLanguage(lang)} 
+            onSelectLanguage={handleLanguageSelect}
           />
-        ) : (
+        ) : showContent && language !== null && (
           <>
-            {/* Animated elements */}
+            {/* Particle effects */}
+            <RosePetals count={12} />
+            <StarParticles count={15} />
+
+            {/* Legacy animated elements */}
             <FloatingHearts />
             <Confetti />
             <SparkleEffect />
-            
-            {/* Music Player */}
-            <MusicPlayer />
-            
+
+            {/* Enhanced Music Player */}
+            <EnhancedMusicPlayer
+              title={language === "ar" ? "موسيقى رومانسية" : "Romantic Music"}
+              showVisualizer
+            />
+
             {/* Main content */}
             <BirthdayMessage language={language} />
           </>

@@ -1,7 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Volume2, VolumeX, Loader2 } from "lucide-react";
-
+import { Volume2, VolumeX, Loader2 } from "lucide-react"
 const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -13,7 +12,7 @@ const MusicPlayer = () => {
       if (!audioRef.current) {
         setIsLoading(true);
         audioRef.current = new Audio(
-          "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+          "assets/love.mp3"
         );
         audioRef.current.loop = true;
         audioRef.current.volume = 0.3;

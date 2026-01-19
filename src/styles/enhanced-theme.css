@@ -1,0 +1,393 @@
+/**
+ * Enhanced Theme CSS
+ * Romantic Visual Enhancements - Custom Properties
+ * 
+ * This file contains CSS custom properties for:
+ * - Enhanced romantic color palette
+ * - Multi-stop gradients
+ * - Glow effects
+ * - Animation timing values
+ */
+
+:root {
+  /* ===== Enhanced Romantic Color Palette ===== */
+  
+  /* Primary Rose Colors */
+  --color-rose-50: 340 100% 97%;
+  --color-rose-100: 340 95% 92%;
+  --color-rose-200: 340 90% 85%;
+  --color-rose-300: 340 85% 75%;
+  --color-rose-400: 340 80% 65%;
+  --color-rose-500: 340 75% 55%;
+  --color-rose-600: 340 70% 45%;
+  --color-rose-700: 340 65% 35%;
+  --color-rose-800: 340 60% 25%;
+  --color-rose-900: 340 55% 15%;
+  
+  /* Gold/Accent Colors */
+  --color-gold-50: 45 100% 95%;
+  --color-gold-100: 45 95% 88%;
+  --color-gold-200: 45 90% 75%;
+  --color-gold-300: 45 90% 65%;
+  --color-gold-400: 45 90% 60%;
+  --color-gold-500: 45 85% 55%;
+  --color-gold-600: 45 80% 50%;
+  --color-gold-700: 45 75% 45%;
+  --color-gold-800: 45 70% 40%;
+  --color-gold-900: 45 65% 35%;
+  
+  /* Burgundy/Deep Colors */
+  --color-burgundy-50: 350 50% 95%;
+  --color-burgundy-100: 350 45% 88%;
+  --color-burgundy-200: 350 40% 75%;
+  --color-burgundy-300: 350 45% 60%;
+  --color-burgundy-400: 350 50% 50%;
+  --color-burgundy-500: 350 55% 40%;
+  --color-burgundy-600: 350 60% 35%;
+  --color-burgundy-700: 350 65% 30%;
+  --color-burgundy-800: 350 70% 25%;
+  --color-burgundy-900: 350 75% 20%;
+  
+  /* Cream/Neutral Colors */
+  --color-cream-50: 40 40% 98%;
+  --color-cream-100: 40 35% 95%;
+  --color-cream-200: 40 30% 90%;
+  --color-cream-300: 40 25% 85%;
+  --color-cream-400: 40 20% 80%;
+  --color-cream-500: 40 15% 75%;
+  
+  /* Soft Pink Colors */
+  --color-pink-50: 340 100% 98%;
+  --color-pink-100: 340 90% 95%;
+  --color-pink-200: 340 80% 90%;
+  --color-pink-300: 340 70% 85%;
+  --color-pink-400: 340 60% 80%;
+  --color-pink-500: 340 60% 75%;
+  
+  /* ===== Multi-Stop Gradients ===== */
+  
+  /* Romantic Gradients */
+  --gradient-romantic-primary: linear-gradient(
+    135deg,
+    hsl(var(--color-rose-400)) 0%,
+    hsl(320 70% 50%) 25%,
+    hsl(var(--color-rose-500)) 50%,
+    hsl(340 80% 65%) 75%,
+    hsl(var(--color-rose-400)) 100%
+  );
+  
+  --gradient-romantic-soft: linear-gradient(
+    135deg,
+    hsl(var(--color-pink-300)) 0%,
+    hsl(var(--color-rose-300)) 50%,
+    hsl(var(--color-pink-400)) 100%
+  );
+  
+  --gradient-romantic-deep: linear-gradient(
+    135deg,
+    hsl(var(--color-burgundy-600)) 0%,
+    hsl(var(--color-rose-700)) 50%,
+    hsl(var(--color-burgundy-700)) 100%
+  );
+  
+  /* Golden Gradients */
+  --gradient-golden-primary: linear-gradient(
+    135deg,
+    hsl(var(--color-gold-400)) 0%,
+    hsl(35 85% 55%) 50%,
+    hsl(var(--color-gold-500)) 100%
+  );
+  
+  --gradient-golden-shimmer: linear-gradient(
+    135deg,
+    hsl(var(--color-gold-300)) 0%,
+    hsl(var(--color-gold-400)) 25%,
+    hsl(45 95% 70%) 50%,
+    hsl(var(--color-gold-400)) 75%,
+    hsl(var(--color-gold-300)) 100%
+  );
+  
+  /* Rose-Gold Gradients */
+  --gradient-rose-gold: linear-gradient(
+    135deg,
+    hsl(var(--color-rose-400)) 0%,
+    hsl(var(--color-gold-400)) 50%,
+    hsl(var(--color-rose-400)) 100%
+  );
+  
+  --gradient-rose-gold-radial: radial-gradient(
+    ellipse at center,
+    hsl(var(--color-rose-400)) 0%,
+    hsl(var(--color-gold-400)) 50%,
+    hsl(var(--color-burgundy-600)) 100%
+  );
+  
+  /* Background Gradients */
+  --gradient-background-primary: radial-gradient(
+    ellipse at top,
+    hsl(340 30% 15%) 0%,
+    hsl(340 30% 10%) 50%,
+    hsl(340 30% 8%) 100%
+  );
+  
+  --gradient-background-layered: linear-gradient(
+    180deg,
+    hsl(340 30% 12%) 0%,
+    hsl(340 30% 8%) 50%,
+    hsl(340 30% 6%) 100%
+  );
+  
+  --gradient-background-spotlight: radial-gradient(
+    circle at 50% 0%,
+    hsl(var(--color-rose-900) / 0.3) 0%,
+    transparent 70%
+  );
+  
+  /* Animated Gradients (for background-position animation) */
+  --gradient-animated-romantic: linear-gradient(
+    -45deg,
+    hsl(var(--color-rose-600)) 0%,
+    hsl(var(--color-burgundy-700)) 25%,
+    hsl(var(--color-rose-500)) 50%,
+    hsl(var(--color-burgundy-600)) 75%,
+    hsl(var(--color-rose-600)) 100%
+  );
+  
+  /* ===== Glow Effects ===== */
+  
+  /* Primary Glow Colors */
+  --glow-rose: hsl(var(--color-rose-400));
+  --glow-rose-intense: hsl(var(--color-rose-300));
+  --glow-gold: hsl(var(--color-gold-400));
+  --glow-gold-intense: hsl(var(--color-gold-300));
+  --glow-pink: hsl(var(--color-pink-400));
+  --glow-burgundy: hsl(var(--color-burgundy-500));
+  
+  /* Glow Blur Radii */
+  --glow-blur-sm: 10px;
+  --glow-blur-md: 20px;
+  --glow-blur-lg: 40px;
+  --glow-blur-xl: 60px;
+  
+  /* Multi-Layer Glow Shadows */
+  --shadow-glow-rose: 
+    0 0 var(--glow-blur-sm) hsl(var(--color-rose-400) / 0.6),
+    0 0 var(--glow-blur-md) hsl(var(--color-rose-400) / 0.4),
+    0 0 var(--glow-blur-lg) hsl(var(--color-rose-400) / 0.2);
+  
+  --shadow-glow-gold:
+    0 0 var(--glow-blur-sm) hsl(var(--color-gold-400) / 0.7),
+    0 0 var(--glow-blur-md) hsl(var(--color-gold-400) / 0.5),
+    0 0 var(--glow-blur-lg) hsl(var(--color-gold-400) / 0.3);
+  
+  --shadow-glow-rose-gold:
+    0 0 var(--glow-blur-sm) hsl(var(--color-rose-400) / 0.5),
+    0 0 var(--glow-blur-md) hsl(var(--color-gold-400) / 0.4),
+    0 0 var(--glow-blur-lg) hsl(var(--color-rose-400) / 0.2);
+  
+  --shadow-glow-intense:
+    0 0 var(--glow-blur-sm) hsl(var(--color-rose-300) / 0.8),
+    0 0 var(--glow-blur-md) hsl(var(--color-rose-300) / 0.6),
+    0 0 var(--glow-blur-lg) hsl(var(--color-rose-300) / 0.4),
+    0 0 var(--glow-blur-xl) hsl(var(--color-rose-300) / 0.2);
+  
+  /* Text Glow Shadows */
+  --text-shadow-glow-rose:
+    0 0 var(--glow-blur-sm) hsl(var(--color-rose-400) / 0.5),
+    0 0 var(--glow-blur-md) hsl(var(--color-rose-400) / 0.3),
+    0 0 var(--glow-blur-lg) hsl(var(--color-rose-400) / 0.2);
+  
+  --text-shadow-glow-gold:
+    0 0 var(--glow-blur-sm) hsl(var(--color-gold-400) / 0.6),
+    0 0 var(--glow-blur-md) hsl(var(--color-gold-400) / 0.4),
+    0 0 var(--glow-blur-lg) hsl(var(--color-gold-400) / 0.2);
+  
+  /* ===== Animation Timing Values ===== */
+  
+  /* Duration */
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-medium: 500ms;
+  --duration-slow: 800ms;
+  --duration-very-slow: 1200ms;
+  
+  /* Easing Functions */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-elegant: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+  /* Spring Physics Values (for Framer Motion) */
+  --spring-stiffness-low: 50;
+  --spring-stiffness-medium: 100;
+  --spring-stiffness-high: 200;
+  --spring-damping-low: 10;
+  --spring-damping-medium: 15;
+  --spring-damping-high: 20;
+  
+  /* ===== Glassmorphism Properties ===== */
+  
+  --glass-background: rgba(255, 255, 255, 0.1);
+  --glass-background-hover: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-blur: 10px;
+  --glass-blur-strong: 20px;
+  
+  /* ===== Z-Index Layers ===== */
+  
+  --z-background: 0;
+  --z-background-pattern: 1;
+  --z-background-spotlight: 2;
+  --z-particles-far: 5;
+  --z-particles-mid: 10;
+  --z-particles-near: 15;
+  --z-content: 20;
+  --z-decorations: 25;
+  --z-interactive: 30;
+  --z-overlay: 40;
+  --z-modal: 50;
+  
+  /* ===== Particle System Values ===== */
+  
+  --particle-count-low: 10;
+  --particle-count-medium: 20;
+  --particle-count-high: 30;
+  
+  /* ===== Border Radius Values ===== */
+  
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+  --radius-full: 9999px;
+  
+  /* ===== Backdrop Blur Values ===== */
+  
+  --backdrop-blur-sm: blur(4px);
+  --backdrop-blur-md: blur(8px);
+  --backdrop-blur-lg: blur(12px);
+  --backdrop-blur-xl: blur(16px);
+}
+
+/* ===== Utility Classes ===== */
+
+/* Gradient Text */
+.gradient-text-romantic {
+  background: var(--gradient-romantic-primary);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-golden {
+  background: var(--gradient-golden-shimmer);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-rose-gold {
+  background: var(--gradient-rose-gold);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated Gradient Text */
+.gradient-text-animated {
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Glow Effects */
+.glow-rose {
+  box-shadow: var(--shadow-glow-rose);
+}
+
+.glow-gold {
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.glow-rose-gold {
+  box-shadow: var(--shadow-glow-rose-gold);
+}
+
+.glow-intense {
+  box-shadow: var(--shadow-glow-intense);
+}
+
+/* Text Glow */
+.text-glow-rose {
+  text-shadow: var(--text-shadow-glow-rose);
+}
+
+.text-glow-gold {
+  text-shadow: var(--text-shadow-glow-gold);
+}
+
+/* Pulsing Glow Animation */
+.glow-pulse {
+  animation: glow-pulse-animation 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-animation {
+  0%, 100% {
+    filter: drop-shadow(0 0 var(--glow-blur-md) var(--glow-rose));
+    opacity: 0.8;
+  }
+  50% {
+    filter: drop-shadow(0 0 var(--glow-blur-lg) var(--glow-rose-intense));
+    opacity: 1;
+  }
+}
+
+/* Glassmorphism */
+.glass {
+  background: var(--glass-background);
+  backdrop-filter: var(--backdrop-blur-md);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-strong {
+  background: var(--glass-background-hover);
+  backdrop-filter: var(--backdrop-blur-lg);
+  border: 1px solid var(--glass-border);
+}
+
+/* GPU Acceleration Hint */
+.gpu-accelerated {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Smooth Transitions */
+.transition-smooth {
+  transition: all var(--duration-normal) var(--ease-smooth);
+}
+
+.transition-elegant {
+  transition: all var(--duration-slow) var(--ease-elegant);
+}
+
+/* Hover Lift Effect */
+.hover-lift {
+  transition: transform var(--duration-normal) var(--ease-smooth),
+              box-shadow var(--duration-normal) var(--ease-smooth);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
