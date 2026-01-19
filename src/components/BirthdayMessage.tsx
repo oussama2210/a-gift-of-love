@@ -1,7 +1,15 @@
 import { motion } from "framer-motion";
 import { Heart, Cake, Gift, Star } from "lucide-react";
+import { translations } from "@/contexts/LanguageContext";
 
-const BirthdayMessage = () => {
+interface BirthdayMessageProps {
+  language: "ar" | "en";
+}
+
+const BirthdayMessage = ({ language }: BirthdayMessageProps) => {
+  const t = translations[language];
+  const isRTL = language === "ar";
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -41,9 +49,12 @@ const BirthdayMessage = () => {
     },
   };
 
+  const nameLetters = t.name.split("");
+
   return (
     <motion.div
       className="relative z-20 flex flex-col items-center justify-center min-h-screen px-6 py-12"
+      style={{ direction: isRTL ? "rtl" : "ltr" }}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -68,41 +79,90 @@ const BirthdayMessage = () => {
       {/* Cake Icon */}
       <motion.div
         variants={itemVariants}
-        className="mb-8"
+        className="mb-6"
       >
         <motion.div
           animate={{ scale: [1, 1.1, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <Cake size={80} className="text-accent" strokeWidth={1.5} />
+          <Cake size={70} className="text-accent" strokeWidth={1.5} />
         </motion.div>
       </motion.div>
 
       {/* Main Title */}
       <motion.h1
         variants={itemVariants}
-        className="text-5xl md:text-7xl lg:text-8xl font-bold text-glow gradient-text text-center mb-6"
+        className="text-4xl md:text-6xl lg:text-7xl font-bold text-glow gradient-text text-center mb-4"
       >
-        عيد ميلاد سعيد
+        {t.happyBirthday}
       </motion.h1>
+
+      {/* Animated Name */}
+      <motion.div
+        variants={itemVariants}
+        className="mb-6"
+      >
+        <div className="flex justify-center gap-1 md:gap-2">
+          {nameLetters.map((letter, index) => (
+            <motion.span
+              key={index}
+              className="text-5xl md:text-7xl lg:text-8xl font-bold text-glow-gold gradient-text-gold"
+              initial={{ opacity: 0, y: 50, rotateY: 90 }}
+              animate={{ 
+                opacity: 1, 
+                y: 0, 
+                rotateY: 0,
+              }}
+              transition={{
+                delay: 1 + index * 0.15,
+                type: "spring",
+                stiffness: 100,
+              }}
+              whileHover={{
+                scale: 1.2,
+                rotate: [0, -10, 10, 0],
+                transition: { duration: 0.3 },
+              }}
+            >
+              <motion.span
+                animate={{
+                  textShadow: [
+                    "0 0 20px hsl(45 90% 60% / 0.6)",
+                    "0 0 40px hsl(45 90% 60% / 0.9)",
+                    "0 0 20px hsl(45 90% 60% / 0.6)",
+                  ],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: index * 0.2,
+                }}
+                className="inline-block"
+              >
+                {letter}
+              </motion.span>
+            </motion.span>
+          ))}
+        </div>
+      </motion.div>
 
       {/* Subtitle */}
       <motion.p
         variants={itemVariants}
-        className="text-2xl md:text-3xl lg:text-4xl font-medium text-foreground/90 text-center mb-8"
+        className="text-xl md:text-2xl lg:text-3xl font-medium text-foreground/90 text-center mb-8"
       >
-        يا أجمل إنسانة في حياتي
+        {t.toTheMost}
       </motion.p>
 
       {/* Love Message */}
       <motion.div
         variants={itemVariants}
-        className="max-w-2xl mx-auto text-center mb-10"
+        className="max-w-2xl mx-auto text-center mb-8"
       >
-        <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-          في يومك الخاص، أريدك أن تعرفي أنك أجمل هدية منحتني إياها الحياة.
+        <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+          {t.message1}
           <br />
-          كل يوم معك هو احتفال، وكل لحظة بجانبك هي نعمة.
+          {t.message2}
         </p>
       </motion.div>
 
@@ -121,7 +181,7 @@ const BirthdayMessage = () => {
           transition={{ duration: 1.5, repeat: Infinity }}
         >
           <Heart
-            size={120}
+            size={100}
             className="text-primary fill-primary relative z-10"
             strokeWidth={1}
           />
@@ -131,41 +191,42 @@ const BirthdayMessage = () => {
       {/* Love Declaration */}
       <motion.div
         variants={itemVariants}
-        className="mt-10"
+        className="mt-8"
       >
         <motion.p
-          className="text-3xl md:text-4xl lg:text-5xl font-bold text-glow-gold gradient-text-gold"
+          className="text-2xl md:text-3xl lg:text-4xl font-bold text-glow gradient-text"
           animate={{ 
-            textShadow: [
-              "0 0 20px hsl(45 90% 60% / 0.6)",
-              "0 0 40px hsl(45 90% 60% / 0.8)",
-              "0 0 20px hsl(45 90% 60% / 0.6)",
-            ]
+            scale: [1, 1.02, 1],
           }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          أحبك إلى الأبد 💕
+          {t.loveForever} 💕
         </motion.p>
       </motion.div>
 
       {/* Wishes */}
       <motion.div
         variants={itemVariants}
-        className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl"
+        className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl w-full px-4"
       >
         {[
-          { icon: Heart, text: "حب لا ينتهي" },
-          { icon: Star, text: "سعادة دائمة" },
-          { icon: Gift, text: "أحلام تتحقق" },
+          { icon: Heart, text: t.wish1 },
+          { icon: Star, text: t.wish2 },
+          { icon: Gift, text: t.wish3 },
         ].map((wish, index) => (
           <motion.div
             key={index}
-            className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-primary/20"
+            className="flex flex-col items-center gap-3 p-5 rounded-2xl bg-card/50 backdrop-blur-sm border border-primary/20"
             whileHover={{ scale: 1.05, borderColor: "hsl(340 80% 60%)" }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <wish.icon size={32} className="text-primary" />
-            <span className="text-lg font-medium text-foreground">{wish.text}</span>
+            <motion.div
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+            >
+              <wish.icon size={28} className="text-primary" />
+            </motion.div>
+            <span className="text-base font-medium text-foreground">{wish.text}</span>
           </motion.div>
         ))}
       </motion.div>
