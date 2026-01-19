@@ -1,15 +1,11 @@
 import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 // Effects
 import EnhancedBackground from "@/components/effects/EnhancedBackground";
-import RosePetals from "@/components/effects/RosePetals";
 import StarParticles from "@/components/effects/StarParticles";
 
 // Components
-import FloatingHearts from "@/components/FloatingHearts";
-import Confetti from "@/components/Confetti";
-import SparkleEffect from "@/components/SparkleEffect";
 import BirthdayMessage from "@/components/BirthdayMessage";
 import LanguageSelector from "@/components/LanguageSelector";
 
@@ -22,7 +18,6 @@ import LoadingAnimation from "@/components/new/LoadingAnimation";
 const Index = () => {
   const [language, setLanguage] = useState<"ar" | "en" | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [showContent, setShowContent] = useState(false);
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
@@ -30,7 +25,6 @@ const Index = () => {
 
   const handleLanguageSelect = (lang: "ar" | "en") => {
     setLanguage(lang);
-    setShowContent(true);
   };
 
   return (
@@ -43,39 +37,40 @@ const Index = () => {
         <LoadingAnimation onComplete={handleLoadingComplete} />
       )}
 
-      {/* Enhanced background */}
-      <EnhancedBackground variant="romantic" patternType="hearts" animated />
+      {/* Enhanced background - always visible */}
+      <EnhancedBackground variant="romantic" patternType="hearts" animated={false} />
 
-      <AnimatePresence mode="wait">
-        {!isLoading && language === null ? (
-          <LanguageSelector
-            key="language-selector"
-            onSelectLanguage={handleLanguageSelect}
+      {/* Language selector */}
+      {!isLoading && language === null && (
+        <LanguageSelector
+          key="language-selector"
+          onSelectLanguage={handleLanguageSelect}
+        />
+      )}
+
+      {/* Main content after language selection */}
+      {language !== null && (
+        <motion.div
+          key="main-content"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          {/* Reduced particle effects - only stars */}
+          <StarParticles count={10} />
+
+          {/* Enhanced Music Player */}
+          <EnhancedMusicPlayer
+            title={language === "ar" ? "موسيقى رومانسية" : "Romantic Music"}
+            showVisualizer={false}
+            audioUrl="/love.mp3"
+            autoPlay
           />
-        ) : showContent && language !== null && (
-          <>
-            {/* Particle effects */}
-            <RosePetals count={12} />
-            <StarParticles count={15} />
 
-            {/* Legacy animated elements */}
-            <FloatingHearts />
-            <Confetti />
-            <SparkleEffect />
-
-            {/* Enhanced Music Player */}
-            <EnhancedMusicPlayer
-              title={language === "ar" ? "موسيقى رومانسية" : "Romantic Music"}
-              showVisualizer
-              audioUrl="/love.mp3"
-              autoPlay
-            />
-
-            {/* Main content */}
-            <BirthdayMessage language={language} />
-          </>
-        )}
-      </AnimatePresence>
+          {/* Main content */}
+          <BirthdayMessage language={language} />
+        </motion.div>
+      )}
     </div>
   );
 };

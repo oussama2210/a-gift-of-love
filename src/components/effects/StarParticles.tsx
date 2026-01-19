@@ -1,7 +1,4 @@
 import { useMemo } from 'react';
-import { motion } from 'framer-motion';
-import { useDeviceCapability } from '@/hooks/useDeviceCapability';
-import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { starColors, getRandomColor } from '@/lib/colors';
 
 interface StarParticlesProps {
@@ -16,67 +13,55 @@ interface Star {
     y: number;
     size: number;
     color: string;
-    twinkleDuration: number;
-    delay: number;
+    animationDelay: string;
     opacity: number;
 }
 
 const StarParticles = ({
-    count,
+    count = 15,
     colors = starColors,
     enabled = true,
 }: StarParticlesProps) => {
-    const { maxParticles, prefersReducedMotion } = useDeviceCapability();
-    const reducedMotion = useReducedMotion();
-
-    // Don't render if disabled or reduced motion preferred
-    if (!enabled || reducedMotion || prefersReducedMotion) {
+    // Don't render if disabled
+    if (!enabled) {
         return null;
     }
 
-    const starCount = count ?? Math.min(20, maxParticles);
-
-    // Generate stars with random properties
+    // Generate stars with random properties - using CSS animations instead of Framer Motion
     const stars: Star[] = useMemo(() => {
-        return Array.from({ length: starCount }, (_, i) => ({
+        return Array.from({ length: count }, (_, i) => ({
             id: i,
             x: Math.random() * 100,
             y: Math.random() * 100,
-            size: 2 + Math.random() * 4,
+            size: 2 + Math.random() * 3,
             color: getRandomColor(colors),
-            twinkleDuration: 2 + Math.random() * 3,
-            delay: Math.random() * 5,
-            opacity: 0.3 + Math.random() * 0.5,
+            animationDelay: `${Math.random() * 5}s`,
+            opacity: 0.3 + Math.random() * 0.4,
         }));
-    }, [starCount, colors]);
+    }, [count, colors]);
 
     return (
-        <div className="particles-container" aria-hidden="true">
+        <div className="fixed inset-0 pointer-events-none overflow-hidden z-1" aria-hidden="true">
+            <style>{`
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.3; transform: scale(0.8); }
+          50% { opacity: 1; transform: scale(1); }
+        }
+      `}</style>
             {stars.map((star) => (
-                <motion.div
+                <div
                     key={star.id}
-                    className="star-particle"
+                    className="absolute rounded-full"
                     style={{
                         left: `${star.x}%`,
                         top: `${star.y}%`,
                         width: star.size,
                         height: star.size,
                         backgroundColor: star.color,
-                        boxShadow: `0 0 ${star.size * 2}px ${star.color}, 0 0 ${star.size * 4}px ${star.color}`,
-                    }}
-                    initial={{
-                        opacity: star.opacity * 0.3,
-                        scale: 0.5,
-                    }}
-                    animate={{
-                        opacity: [star.opacity * 0.3, star.opacity, star.opacity * 0.3],
-                        scale: [0.5, 1, 0.5],
-                    }}
-                    transition={{
-                        duration: star.twinkleDuration,
-                        delay: star.delay,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
+                        boxShadow: `0 0 ${star.size * 2}px ${star.color}`,
+                        opacity: star.opacity,
+                        animation: `twinkle 3s ease-in-out infinite`,
+                        animationDelay: star.animationDelay,
                     }}
                 />
             ))}
