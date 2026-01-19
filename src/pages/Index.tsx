@@ -67,6 +67,7 @@ const Index = () => {
             <EnhancedMusicPlayer
               title={language === "ar" ? "موسيقى رومانسية" : "Romantic Music"}
               showVisualizer
+              audioUrl="/love.mp3"
             />
 
             {/* Main content */}
