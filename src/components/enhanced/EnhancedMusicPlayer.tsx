@@ -106,6 +106,30 @@ const EnhancedMusicPlayer = ({
         };
     }, []);
 
+    // Handle autoPlay
+    useEffect(() => {
+        if (autoPlay && !isPlaying) {
+            // Attempt to play automatically
+            const playAudio = async () => {
+                if (!audioRef.current) {
+                    await initAudio();
+                }
+                if (audioRef.current) {
+                    try {
+                        if (audioContextRef.current?.state === 'suspended') {
+                            await audioContextRef.current.resume();
+                        }
+                        await audioRef.current.play();
+                        setIsPlaying(true);
+                    } catch (error) {
+                        console.log('Auto-play prevented by browser policy. User interaction required.');
+                    }
+                }
+            };
+            playAudio();
+        }
+    }, [autoPlay, initAudio]); // removed isPlaying dependency to avoid loop if it fails
+
     const togglePlay = async () => {
         if (!audioRef.current) {
             await initAudio();

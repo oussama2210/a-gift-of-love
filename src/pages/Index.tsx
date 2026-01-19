@@ -68,6 +68,7 @@ const Index = () => {
               title={language === "ar" ? "موسيقى رومانسية" : "Romantic Music"}
               showVisualizer
               audioUrl="/love.mp3"
+              autoPlay
             />
 
             {/* Main content */}
