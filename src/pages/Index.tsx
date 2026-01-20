@@ -8,6 +8,7 @@ import StarParticles from "@/components/effects/StarParticles";
 // Components
 import BirthdayMessage from "@/components/BirthdayMessage";
 import LanguageSelector from "@/components/LanguageSelector";
+import LoveCounter from "@/components/LoveCounter";
 
 // Enhanced components
 import EnhancedMusicPlayer from "@/components/enhanced/EnhancedMusicPlayer";
@@ -66,6 +67,9 @@ const Index = () => {
             audioUrl="/love.mp3"
             autoPlay
           />
+
+          {/* Love Counter */}
+          <LoveCounter />
 
           {/* Main content */}
           <BirthdayMessage language={language} />
