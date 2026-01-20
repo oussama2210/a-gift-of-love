@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { Heart, Calendar, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const LoveCounter = () => {
-  const { language } = useLanguage();
+interface LoveCounterProps {
+  language: 'ar' | 'en';
+}
+
+const LoveCounter = ({ language }: LoveCounterProps) => {
   const startDate = new Date('2025-11-01');
   const [timeTogether, setTimeTogether] = useState({
     days: 0,

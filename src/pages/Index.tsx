@@ -69,7 +69,7 @@ const Index = () => {
           />
 
           {/* Love Counter */}
-          <LoveCounter />
+          <LoveCounter language={language} />
 
           {/* Main content */}
           <BirthdayMessage language={language} />
